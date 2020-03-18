@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+	 <link rel="stylesheet"  type="text/css" href='dd.css' />
+	<script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+	 <style>
+        table, td, th {  
+  border: 3px solid #ddd;
+  text-align: left;
+  
+  
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  
+}
+
+th, td {
+
+  padding: 15px;
+}
+    </style>
+	<style>
+h1 {
+ font-family:"Times New Roman", Times, serif;
+font-size:40px;
+color:#0066CC;
+padding-left:80px;
+}
+ </style>  
+</head>
+<body>
+<div id="wrapper" style="width:1200px; height:900px; margin:0 auto">
+
+<h1>Graphical View</h1>
+
+<div id="container" style="width:450px; height: 400px; float:left" ></div>
+<div id="tab" style="width:700px; height: 500px; float:right">
+<h1>Statistics</h1>
+<table id="empTable">
+  {% for key, value in result.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+       
+</table>
+<p><input type="button" id="bt" value="Show Graph" onClick="showTableData()" /></p>
+<p id="info"></p>
+</div>
+
+</div>
+</body>
+
+<script>
+var array=[];
+    function showTableData() {
+        document.getElementById('info').innerHTML = "";
+        var myTab = document.getElementById('empTable');
+      
+       var u=0;
+        // LOOP THROUGH EACH ROW OF THE TABLE AFTER HEADER.
+        for (i = 0; i < myTab.rows.length; i++)
+        {
+
+            // GET THE CELLS COLLECTION OF THE CURRENT ROW.
+            var objCells = myTab.rows.item(i).cells;
+
+            // LOOP THROUGH EACH CELL OF THE CURENT ROW TO READ CELL VALUES.
+            for (var j = 1; j < 2;j++)
+            {
+                 array[u]=objCells.item(j);
+                info.innerHTML = info.innerHTML + ' ' + array[u].innerHTML;
+
+            }
+            u=u+1
+        }
+	
+    }
+	
+	 var array=[23,56,12]
+	
+	anychart.onDocumentReady(function() {
+
+    // set the data
+    var data = [
+        {x: "Positive", value:array[0]},
+        {x: "Negative", value:array[1]},
+        {x: "Neutral", value: array[2]}
+
+    ];
+
+    // create the chart
+    var chart = anychart.pie();
+
+    // set the chart title
+    chart.title("Sentiment analysis of Tweets");
+
+    // add the data
+    chart.data(data);
+
+    // display the chart in the container
+    chart.container('container');
+    chart.draw();
+
+});
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+
+<script>
+
+    </script>
+
+
+
+
+
+
+
+</html>
